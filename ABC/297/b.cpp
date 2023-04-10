@@ -22,7 +22,7 @@ int main()
         if (s[i] == 'K') b = i;
     }
 
-    // 問題文の条件を満たすか判定g
+    // 問題文の条件を満たすか判定
     if ((a < b && b < c) && (x % 2 != y % 2)) {
         cout << "Yes" << endl;
     } else {
