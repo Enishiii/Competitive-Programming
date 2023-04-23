@@ -6,22 +6,16 @@ int main() {
     string s;
     cin >> n >> s;
 
-    bool ok = false;
+    int v_first = -1, ast, v_second;
     for (int i = 0; i < n; ++i) {
         if (s[i] == '|') {
-            for (int j = i + 1; j < n; ++j) {
-                if (s[j] == '*') {
-                    for (int k = j+1; k < n; ++k) {
-                        if (s[k] == '|') {
-                            ok = true;
-                            break;
-                        }
-                    }
-                }
-            }
+            if (v_first < 0) v_first = i;
+            else v_second = i;
         }
+        if (s[i] == '*') ast = i;
     }
-    if (ok) cout << "in" << endl;
+
+    if (v_first < ast && ast < v_second) cout << "in" << endl;
     else cout << "out" << endl;
 
     return 0;
