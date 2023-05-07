@@ -28,7 +28,7 @@ class UnionFind {
     }
 
     // 親を１つずつたどって、頂点x の根を返す（再帰関数でも実装可能だが、読みにくいのでやめた。）
-    int root(int x) {
+    int returnRoot(int x) {
         while(true) {
             if (par[x] == -1) break; // 親が存在しないなら、終了
             x = par[x];
@@ -38,19 +38,19 @@ class UnionFind {
 
     // 要素uとvを統合する
     void unite(int u, int v) {
-        int root_u = root(u);
-        int root_v = root(v);
+        int root_u = returnRoot(u);
+        int root_v = returnRoot(v);
         if (root_u == root_v) return; // 根が同じなら、同一グループ
 
-        if (size[root_u] < size[root_v]) swap(root_u, root_v); // 常にroo_uの要素数が大きいようにする
+        if (size[root_u] < size[root_v]) swap(root_u, root_v); // 常にroot_uの要素数が大きいようにする
         par[root_v] = root_u; // 要素数が大きい方の根を小さい方の親にすることで、高速化できる
         size[root_u] += size[root_v];
     }
 
     // 要素uとvが同一のグループか判定する
-    bool same(int u, int v) {
+    bool isSame(int u, int v) {
         // 根が同じなら、同一グループ
-        if (root(u) == root(v)) return true;
+        if (returnRoot(u) == returnRoot(v)) return true;
         return false;
     }
 };
@@ -69,7 +69,7 @@ int main() {
         if (query == 1) {
             uf.unite(u, v);
         } else if (query == 2) {
-            if (uf.same(u, v)) cout << "Yes" << endl;
+            if (uf.isSame(u, v)) cout << "Yes" << endl;
             else cout << "No" << endl;
         }
     }
