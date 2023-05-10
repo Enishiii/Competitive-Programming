@@ -14,21 +14,12 @@ H×W のマス目があります．上からi 行目，左からj 列目にあ�
 using namespace std;
 
 int main() {
-    // 入力を受け取る
+    // マス目を受け取る
     int h, w;
     cin >> h >> w;
-
     vector<vector<int>> x(h, vector<int>(w));
     for (int i = 0; i < h; ++i) {
         for (int j = 0; j < w; ++j) cin >> x[i][j];
-    }
-
-    int q;
-    cin >> q;
-    vector<int> a(q), b(q), c(q), d(q);
-    for (int i = 0; i < q; ++i) {
-        cin >> a[i] >> b[i] >> c[i] >> d[i];
-        a[i]--, b[i]--, c[i]--, d[i]--; // 0-indexedに合わせる
     }
 
     // 二次元の累積和を用意
@@ -46,16 +37,23 @@ int main() {
     for (int i = 0; i < h; ++i) {
         for (int j = 0; j < w; ++j) {
             if (i == 0) continue;
-            prefixSum[i][j] = prefixSum[i-1][j] + prefixSum[i][j];
+            prefixSum[i][j] += prefixSum[i-1][j];
         }
     }
 
-    // 全体から左端一列と上１行を切り取って、2回引いた左斜め上の角を足すと、求めたい答えになる
+    // q個の質問を受け取り、都度答えを出力する
+    // 全体の累積和から左端一列と上１行の累積和を引き、2回引いた左斜め上の角の累積和を足すと、求めたい答えになる
+    int q;
+    cin >> q;
     for (int i = 0; i < q; ++i) {
-        int total = prefixSum[c[i]][d[i]];
-        if (a[i] > 0) total -= prefixSum[a[i]-1][d[i]];
-        if (b[i] > 0) total -= prefixSum[c[i]][b[i]-1];
-        if (a[i] > 0 && b[i] > 0) total += prefixSum[a[i]-1][b[i]-1];
+        int a, b, c, d;
+        cin >> a >> b >> c >> d;
+        a--, b--, c--, d--; // 0-indexedに合わせる
+
+        int total = prefixSum[c][d];
+        if (a > 0) total -= prefixSum[a-1][d];
+        if (b > 0) total -= prefixSum[c][b-1];
+        if (a > 0 && b > 0) total += prefixSum[a-1][b-1];
         cout << total << endl;
     }
 
