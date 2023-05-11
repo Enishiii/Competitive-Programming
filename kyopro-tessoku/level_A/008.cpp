@@ -14,13 +14,9 @@ H×W のマス目があります．上からi 行目，左からj 列目にあ�
 using namespace std;
 
 int main() {
-    // マス目を受け取る
+    // 入力を受け取る
     int h, w;
     cin >> h >> w;
-    vector<vector<int>> x(h, vector<int>(w));
-    for (int i = 0; i < h; ++i) {
-        for (int j = 0; j < w; ++j) cin >> x[i][j];
-    }
 
     // 二次元の累積和を用意
     vector<vector<int>> prefixSum(h, vector<int>(w));
@@ -28,8 +24,10 @@ int main() {
     // まず横の累積和をとる
     for (int i = 0; i < h; ++i) {
         for (int j = 0; j < w; ++j) {
-            if (j == 0) prefixSum[i][j] = x[i][j];
-            else prefixSum[i][j] = prefixSum[i][j-1] + x[i][j];
+            int x;
+            cin >> x;
+            if (j == 0) prefixSum[i][j] = x;
+            else prefixSum[i][j] = prefixSum[i][j-1] + x;
         }
     }
 
