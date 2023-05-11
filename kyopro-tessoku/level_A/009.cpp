@@ -17,21 +17,19 @@ int main() {
     // 入力を受け取る
     int h, w, n;
     cin >> h >> w >> n;
-    vector<int> a(n+1), b(n+1), c(n+1), d(n+1);
-    for (int i = 1; i <= n; ++i) {
-        cin >> a[i] >> b[i] >> c[i] >> d[i];
-    }
 
     // 差分を取った二次元配列と累積和の二次元配列を用意
     vector<vector<int>> diff_matrix(h+2, vector<int>(w+2)), prefix_sum_matrix; // 配列の添字が制約の範囲を超えないように、配列のサイズを確保する
     prefix_sum_matrix = diff_matrix;
 
     // 左上と右下の右隣を＋1、右上と左下を−1する（これで二次元累積和をとれば、求めたい二次元配列になる）
-    for (int i = 1; i <= n; ++i) {
-        diff_matrix[a[i]][b[i]] += 1;
-        diff_matrix[a[i]][d[i] + 1] -= 1;
-        diff_matrix[c[i] + 1][b[i]] -= 1;
-        diff_matrix[c[i] + 1][d[i] + 1] += 1;
+    for (int i = 0; i < n; ++i) {
+        int a, b, c, d;
+        cin >> a >> b >> c >> d;
+        diff_matrix[a][b]++;
+        diff_matrix[a][d + 1]--;
+        diff_matrix[c + 1][b]--;
+        diff_matrix[c + 1][d + 1]++;
     }
 
     // 横の累積和
