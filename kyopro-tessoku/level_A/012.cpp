@@ -13,7 +13,7 @@ N 台のプリンターがあり、1 からN までの番号が付けられて�
 using namespace std;
 
 // x秒後の合計印刷枚数sumがk以上かどうかを判定
-bool check(int x, int k, vector<int> a) {
+bool check(int x, int k, const vector<int> &a) {
     long long sum = 0;
     for (auto s : a) sum += x / s;
     if (sum >= k) return true;
@@ -27,10 +27,10 @@ int main() {
     for (int i = 0; i < n; ++i) cin >> a[i];
 
     // 答えが10^9までなので、その範囲を二分探索して合計印刷枚数が初めてk以上になる秒数を見つける
-    const int Max = 1'000'000'000;
-    int left = 0, right = Max;
+    const int Max = 1e9;
+    int left = 1, right = Max;
     while(left < right) {
-        int mid = (left+right) / 2;
+        int mid = left + (right - left) / 2;
         if (check(mid, k, a)) right = mid;
         else left = mid + 1;
     }
