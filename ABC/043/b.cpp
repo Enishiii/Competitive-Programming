@@ -26,7 +26,7 @@ int main() {
             ans += '1';
         } else if (s[i] == 'B') {
             if (ans == "") continue; // 空文字列なら何もしない
-            ans.erase(ans.length() - 1); // 末尾を削除（substrで末尾だけを除いたもので置き換える方法もあり）
+            ans.pop_back(); // 末尾を削除（eraseを使う方法や、substrで末尾だけを除いたもので置き換える方法もあり）
         }
     }
     cout << ans << endl;
