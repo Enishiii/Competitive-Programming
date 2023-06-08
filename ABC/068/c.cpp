@@ -16,29 +16,35 @@ i != j ならば(ai, bi) != (aj, bj) */
 using namespace std;
 
 int main() {
-    int n, m;
-    cin >> n >> m;
+    // 島の数(n)と定期便の数(m)を読み込む
+    int numIslands, numRoutes;
+    cin >> numIslands >> numRoutes;
 
-    vector<vector<int>> g(n, vector<int>());
-    for (int i = 0; i < m; ++i) {
+    // それぞれの島がどの島とつながっているかを表現する二次元配列
+    vector<vector<int>> graph(numIslands, vector<int>());
+    for (int i = 0; i < numRoutes; ++i) {
+        // 定期便の始点(a)と終点(b)を読み込む
         int a, b;
         cin >> a >> b;
         a--, b--;
-        g[a].push_back(b);
-        g[b].push_back(a);
+        // 始点から終点、終点から始点への道を表現
+        graph[a].push_back(b);
+        graph[b].push_back(a);
     }
 
-    bool ok = false;
-    for (auto j : g[0]) {
-        for (auto k : g[j]) {
-            if (k == n-1) {
-                ok = true;
+    // 島1から島Nへの経路が存在するかのフラグ
+    bool routeExists = false;
+    // 島1から直接行ける各島について
+    for (auto island : graph[0]) {
+        for (auto connectedIsland : graph[island]) {
+            if (connectedIsland == numIslands - 1) {
+                routeExists = true;
                 break;
             }
         }
     }
 
-    if (ok) cout << "POSSIBLE" << endl;
+    if (routeExists) cout << "POSSIBLE" << endl;
     else cout << "IMPOSSIBLE" << endl;
 
     return 0;
