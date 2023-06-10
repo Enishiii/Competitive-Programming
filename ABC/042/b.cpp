@@ -12,29 +12,28 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-using namespace std;
 
 int main() {
     // 入力を受け取る
     int num_strings, length_strings;
-    cin >> num_strings >> length_strings;
+    std::cin >> num_strings >> length_strings;
 
     // 文字列を格納するvectorを作成
-    vector<string> strings(num_strings);
+    std::vector<std::string> strings(num_strings);
 
     // 各文字列を受け取る
-    for (int i = 0; i < num_strings; ++i) {
-        cin >> strings[i];
+    for (auto& str : strings) {
+        std::cin >> str;
     }
 
     // 文字列を辞書順に並び替える
-    sort(strings.begin(), strings.end());
+    std::sort(strings.begin(), strings.end());
 
     // 各文字列を順番に出力する
-    for (int i = 0; i < num_strings; ++i) {
-        cout << strings[i];
+    for (const auto& str : strings) {
+        std::cout << str;
     }
-    cout << endl;
+    std::cout << std::endl;
 
     return 0;
 }
