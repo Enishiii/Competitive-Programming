@@ -10,17 +10,14 @@
 N は整数*/
 
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 int main() {
     int n;
     cin >> n;
 
-    if (n % 10 == 0 || n % 10 == 5) cout << n << endl;
-    else if (n % 10 == 1 || n % 10 == 6) cout << n-1 << endl;
-    else if (n % 10 == 2 || n % 10 == 7) cout << n-2 << endl;
-    else if (n % 10 == 3 || n % 10 == 8) cout << n+2 << endl;
-    else if (n % 10 == 4 || n % 10 == 9) cout << n+1 << endl;
+    cout << int(round(n / 5.0)) * 5 << endl;
 
     return 0;
 }
