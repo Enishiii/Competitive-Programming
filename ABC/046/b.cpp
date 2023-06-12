@@ -1,13 +1,24 @@
+/* 問題文
+シカのAtCoDeerくんは一列に並んだN 個のボールをそれぞれK 色のペンキの色のうちのどれかで塗ろうとしています。見栄えが悪くならないように、隣り合ったボールは別の色で塗ることにします。ボールの塗り方としてあり得るものの個数を求めてください。
+
+制約
+1≦N≦1000
+2≦K≦1000
+答えは2^31−1 以下 */
+
 #include <iostream>
-#include <cmath>
 using namespace std;
 
 int main() {
-    int n, k;
-    cin >> n >> k;
+    int num_balls, num_colors;
+    cin >> num_balls >> num_colors;
 
-    long long ans = k * pow((k-1), n-1);
-    cout << ans << endl;
+    long long total_ways = num_colors;
+    for (int i = 1; i < num_balls; ++i) {
+        total_ways *= (num_colors - 1);
+    }
+
+    cout << total_ways << endl;
 
     return 0;
 }
