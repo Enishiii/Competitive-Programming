@@ -3,6 +3,12 @@
 #include <algorithm>
 using namespace std;
 
+bool is_palindrome(const string& str) {
+    string reversed_str = str;
+    reverse(reversed_str.begin(), reversed_str.end());
+    return str == reversed_str;
+}
+
 int main() {
     int n;
     cin >> n;
@@ -14,11 +20,9 @@ int main() {
         for (int j = 0; j < n; ++j) {
             if (i == j) continue;
 
-            string target = s[i] + s[j];
-            string copy = target;
-            reverse(copy.begin(), copy.end());
+            string concatenated = s[i] + s[j];
 
-            if (target == copy) {
+            if (is_palindrome(concatenated)) {
                 cout << "Yes" << endl;
                 return 0;
             }
