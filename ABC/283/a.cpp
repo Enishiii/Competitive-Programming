@@ -1,3 +1,10 @@
+/* 問題文
+整数A,B が与えられます。A^B の値を出力してください。
+
+制約
+1≤A,B≤9
+入力はすべて整数 */
+
 #include <iostream>
 using namespace std;
 
