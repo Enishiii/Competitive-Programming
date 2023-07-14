@@ -13,24 +13,23 @@ N 個のサイコロが左から右に一列に並べてあります。左から
 using namespace std;
 
 int main() {
-    int n, k;
-    cin >> n >> k;
+    int N, K;
+    cin >> N >> K;
+    vector<double> p(N);
+    for (int i = 0; i < N; i++) cin >> p[i];
 
-    vector<double> p(n);
-    for (int i = 0; i < n; ++i) cin >> p[i];
+    // 期待値を求める
+    vector<double> E(N);
+    for (int i = 0; i < N; i++) E[i] = (p[i] + 1) / 2;
 
-    // 期待値を前もって求める
-    vector<double> e(n);
-    for (int i = 0; i < n; ++i) e[i] = (p[i]+1) / 2; // e = (1/p) * [1 + 2 + ... + p] = (1/p) * p*(p+1)/2 = (p+1)/2
+    // 累積和を求める
+    vector<double> S(N + 1, 0);
+    for (int i = 0; i < N; i++) S[i + 1] = S[i] + E[i];
 
-    // 累積和を求めておく
-    vector<double> s(n+1, 0);
-    for (int i = 0; i < n; ++i) s[i+1] = s[i] + e[i];
-
+    // 隣接するK個の期待値の和の最大値を求める
     double maxE = 0;
-    for (int i = 0; i <= n-k; ++i) {
-        maxE = max(maxE, s[i+k] - s[i]);
-    }
+    for (int i = 0; i <= N - K; i++)
+        maxE = max(maxE, S[i + K] - S[i]);
 
     cout << setprecision(10) << maxE << endl;
 
