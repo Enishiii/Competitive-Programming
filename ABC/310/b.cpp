@@ -1,57 +1,55 @@
+/* 問題文
+AtCoder 商店には N 個の商品があります。
+i (1≤i≤N) 番目の商品の価格は Pi です。
+i (1≤i≤N) 番目の商品は Ci 個の機能をもち、i (1≤i≤N) 番目の商品のj (1≤j≤Ci) 番目の機能は
+1 以上 M 以下の整数Fi,j として表されます。
+高橋くんは、AtCoder 商店の商品で一方が一方の上位互換であるものがないか気になりました。 i 番目の商品とj 番目の商品(1≤i,j≤N) であって、次の条件をすべて満たすものがあるとき Yes と、ないとき No と出力してください。
+・Pi ≥Pj である。
+・j 番目の製品はi 番目の製品がもつ機能をすべてもつ。
+・Pi >Pj であるか、j 番目の製品はi 番目の製品にない機能を1 つ以上もつ。
+
+制約
+2≤N≤100
+1≤M≤100
+1≤Pi ≤10^5(1≤i≤N)
+1≤Ci ≤M (1≤i≤N)
+1≤Fi,1 <Fi,2<⋯<Fi,Ci ≤M (1≤i≤N)
+入力はすべて整数 */
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <unordered_set>
+#include <set>
 using namespace std;
 
-bool Subset(const vector<int> &small, const vector<int> &large) {
-    unordered_set<int> largeSet(large.begin(), large.end());
-
-    for (int num : small) {
-        if (largeSet.find(num) == largeSet.end()) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
 int main() {
-    int N, M;
-    cin >> N >> M;
+    int n, m;
+    cin >> n >> m;
 
-    vector<int> P(N);
-    vector<vector<int>> features(N, vector<int>());
-    for (int i = 0; i < N; i++) {
-        int C;
-        cin >> P[i] >> C;
-        for (int j = 0; j < C; j++) {
-            int F;
-            cin >> F;
-            features[i].push_back(F);
+    vector<int> p(n), c(n);
+    vector<set<int>> f(n);
+
+    for (int i = 0; i < n; ++i) {
+        cin >> p[i] >> c[i];
+        f[i] = set<int>();
+        for (int j = 0; j < c[i]; ++j) {
+            int feature;
+            cin >> feature;
+            f[i].insert(feature);
         }
     }
 
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            if (i == j || P[i] < P[j]) continue;
-
-            bool isSubset = true;
-            vector<int> fi = features[i];
-            vector<int> fj = features[j];
-
-            if (!Subset(fi, fj)) isSubset = false;
-
-            bool hasExtraFeature = false;
-            if (fj.size() > fi.size()) hasExtraFeature = true;
-
-            if (isSubset && (hasExtraFeature || P[i] > P[j])) {
-                cout << "Yes\n";
-                return 0;
-            }
+    bool ans = false;
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            bool priceCondition = p[i] >= p[j];
+            bool isSuperset = includes(f[j].begin(), f[j].end(), f[i].begin(), f[i].end());
+            bool extraFeatureCondition = p[i] > p[j] || f[j].size() > f[i].size();
+            ans |= priceCondition && isSuperset && extraFeatureCondition;
         }
     }
 
-    cout << "No\n";
+    cout << (ans ? "Yes" : "No") << endl;
+
     return 0;
 }
