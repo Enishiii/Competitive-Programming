@@ -19,6 +19,8 @@ int main() {
     vector<int> p(n+1);
     for (int i = 1; i <= n; ++i) cin >> p[i];
 
+    // 問題文の通りに素直にシミュレーションしていく
+
     int cnt = 0;
     for (int i = 1; i < n; ++i) {
         if (p[i] == i) {
