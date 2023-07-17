@@ -20,12 +20,18 @@ int main() {
     for (int i = 1; i <= n; ++i) cin >> p[i];
 
     int cnt = 0;
-    for (int i = 1; i <= n; ++i) {
+    for (int i = 1; i < n; ++i) {
         if (p[i] == i) {
             swap(p[i], p[i+1]);
             cnt++;
         }
     }
+
+    if (p[n] == n) {
+        swap(p[n], p[n-1]);
+        cnt++;
+    }
+
     cout << cnt << endl;
 
     return 0;
