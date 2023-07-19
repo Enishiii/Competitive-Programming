@@ -4,8 +4,10 @@
 using namespace std;
 
 void dfs(int x, int y, vector<int> edges[], bool visited[], bool& reached, deque<int>& path) {
+    // パスに現在の頂点を追加
     if (!reached) path.push_back(x);
 
+    // 目的地に到達したか確認
     if (x == y) reached = true;
 
     visited[x] = true;
@@ -17,6 +19,7 @@ void dfs(int x, int y, vector<int> edges[], bool visited[], bool& reached, deque
         }
     }
 
+    // 目的地にまだ到達していなければ、現在の頂点をパスから削除
     if (!reached) path.pop_back();
 }
 
@@ -24,10 +27,10 @@ int main() {
     int n, x, y;
     cin >> n >> x >> y;
 
-    vector<int> edges[n+1];
-    bool visited[n+1];
-    bool reached = false;
-    deque<int> path;
+    vector<int> edges[n+1]; // 頂点iに接続するエッジのリスト
+    bool visited[n+1]; // 頂点iが訪問済みかどうかを記録するフラグ
+    bool reached = false; // Yに到達したかどうかを記録するフラグ
+    deque<int> path; // XからYへのパスを記録する
 
     for (int i = 0; i < n-1; ++i) {
         int u, v;
