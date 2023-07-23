@@ -1,6 +1,16 @@
+/* 問題文
+A, B, C からなる文字列S が与えられます。
+S は A, B, C を全て含むことが保証されます。
+S を左から1 文字ずつ見ていったときに、はじめて次の条件を満たした状態になるのは、左から何文字目まで見たときですか？
+    ・A, B, C が全て1 回以上出現している。
+
+制約
+3≤N≤100
+S は A, B, C からなる長さN の文字列
+S は A, B, C を全て含む */
+
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include <set>
 using namespace std;
 
 int main() {
@@ -8,15 +18,11 @@ int main() {
     string s;
     cin >> n >> s;
 
-    bool a = false;
-    bool b = false;
-    bool c = false;
+    set<char> st; // 文字の種類数を管理
     for (int i = 0; i < n; ++i) {
-        if (s[i] == 'A') a = true;
-        else if (s[i] == 'B') b = true;
-        else if (s[i] == 'C') c = true;
+        st.insert(s[i]);
 
-        if (a && b && c) {
+        if (st.size() == 3) {
             cout << i + 1 << endl;
             return 0;
         }
