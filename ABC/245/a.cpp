@@ -16,14 +16,12 @@ int main() {
     int a, b, c, d;
     cin >> a >> b >> c >> d;
 
-    bool takahashi = false;
-
-    if (a < c) takahashi = true;
-    else if (c < a) takahashi = false;
-    else if (b <= d) takahashi = true;
-
-    if (takahashi) cout << "Takahashi" << endl;
-    else cout << "Aoki" << endl;
+    if (a < c || (a == c && b <= d)) {
+        cout << "Takahashi" << endl;
+    }
+    else {
+        cout << "Aoki" << endl;
+    }
 
     return 0;
 }
