@@ -51,3 +51,30 @@ int main() {
 
     return 0;
 }
+
+/*
+別解
+int main() {
+    int n, d, p;
+    cin >> n >> d >> p;
+    vector<int> f(n);
+    for (int i = 0; i < n; ++i) cin >> f[i];
+    sort(f.begin(), f.end());
+
+    ll ans = 0;
+    for (int i = 0; i < n; ++i) ans += f[i];
+    while(f.size()) {
+        ll s = 0;
+        int sz = min<int>(d, f.size());
+        for (int i = 0; i < sz; ++i) {
+            s += f.back();
+            f.pop_back();
+        }
+        if (s < p) break;
+        ans -= s - p;
+    }
+    cout << ans << endl;
+
+    return 0;
+}
+*/
