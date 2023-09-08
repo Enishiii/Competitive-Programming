@@ -22,26 +22,23 @@ int main() {
     cin >> m;
 
     vector<int> d(m);
-    int sum = 0;
+    int totalDays = 0;
+
     for (int i = 0; i < m; ++i) {
         cin >> d[i];
-        sum += d[i];
+        totalDays += d[i];
     }
 
-    int middle = (sum + 1) / 2;
+    int targetDay = (totalDays + 1) / 2;
 
-    int month = 1;
-    int day = 0;
     for (int i = 0; i < m; ++i) {
-        if (middle > d[i]) {
-            middle -= d[i];
-            month++;
+        if (targetDay <= d[i]) {
+            cout << i + 1 << " " << targetDay << endl;
+            return 0;
         } else {
-            day += middle;
-            break;
+            targetDay -= d[i];
         }
     }
-    cout << month << " " << day << endl;
 
     return 0;
 }
