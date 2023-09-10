@@ -11,18 +11,15 @@ ak に変わります。
 */
 
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main() {
     int a[10];
     for (int i = 0; i < 10; ++i) cin >> a[i];
 
-    int i = 0;
     int ans = 0;
-    for (int j = 0; j < 3; ++j) {
-        ans = a[i];
-        i = ans;
+    for (int i = 0; i < 3; ++i) {
+        ans = a[ans];
     }
     cout << ans << endl;
 
