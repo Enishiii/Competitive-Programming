@@ -9,6 +9,14 @@
 #include <algorithm>
 using namespace std;
 
+bool isPalindrome(const string& s) {
+    int n = s.size();
+    for (int i = 0; i < n / 2; ++i) {
+        if (s[i] != s[n - i - 1]) return false;
+    }
+    return true;
+}
+
 int main() {
     string s;
     cin >> s;
@@ -17,13 +25,10 @@ int main() {
     int ans = 1;
 
     for (int i = 0; i < n; ++i) {
-        for (int j = 2; j <= n; ++j) {
-            string t = s.substr(i, j);
-            string u = t;
-            reverse(u.begin(), u.end());
-            if (t == u) {
-                int m = t.size();
-                ans = max(ans, m);
+        for (int j = i+1; j <= n; ++j) {
+            string t = s.substr(i, j - i);
+            if (isPalindrome(t)) {
+                ans = max(ans, j - i);
             }
         }
     }
