@@ -18,41 +18,43 @@ i=1,2,…,N について、人i は37 個の目のうちCi 個の目Ai,1, Ai,2, 
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 int main() {
     int n;
     cin >> n;
 
-    vector<vector<int>> a(n, vector<int>());
-    vector<int> c(n);
+    vector<vector<int>> bets(n);
+    vector<int> bet_count(n);
 
     for (int i = 0; i < n; ++i) {
-        cin >> c[i];
-        a[i].resize(c[i]);
-        for (int j = 0; j < c[i]; ++j) cin >> a[i][j];
+        int c;
+        cin >> c;
+        bet_count[i] = c;
+        bets[i].resize(c);
+
+        for (int& bet : bets[i]) cin >> bet;
     }
 
     int x;
     cin >> x;
 
-    vector<int> winner;
+    vector<int> winners;
+    int min_bets = 38;
+
     for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < c[i]; ++j) {
-            if (a[i][j] == x) {
-                winner.push_back(i);
+        if (find(bets[i].begin(), bets[i].end(), x) != bets[i].end()) {
+            if (bet_count[i] < min_bets) {
+                winners.clear();
+                min_bets = bet_count[i];
             }
+            if (bet_count[i] == min_bets) winners.push_back(i+1);
         }
     }
 
-    int cmin = 37;
-    for (auto i : winner) cmin = min(cmin, c[i]);
-
-    vector<int> ans;
-    for (auto i : winner) if (c[i] == cmin) ans.push_back(i+1);
-
-    cout << ans.size() << endl;
-    for (auto b : ans) cout << b << " ";
+    cout << winners.size() << endl;
+    for (const auto& winner : winners) cout << winner << " ";
     cout << endl;
 
     return 0;
