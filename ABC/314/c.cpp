@@ -19,27 +19,41 @@ S は英小文字からなる長さN の文字列
 #include <vector>
 using namespace std;
 
-int main() {
-    int n, m;
-    string s;
-    cin >> n >> m >> s;
+vector<int> readColors(int length) {
+    vector<int> colors(length);
+    for (int& color : colors) cin >> color;
+    return colors;
+}
 
-    vector<int> c(n);
-    vector<vector<int>> p(m+1, vector<int>());
-    for (int i = 0; i < n; ++i) {
-        cin >> c[i];
-        p[c[i]].push_back(i);
-    }
+vector<vector<int>> getPositions(const vector<int>& colors, int numOfColors) {
+    vector<vector<int>> positions(numOfColors+1);
+    for (int i = 0; i < colors.size(); ++i)
+        positions[colors[i]].push_back(i);
+    return positions;
+}
 
-    string t(s); // sをコピーして、初期化
-    for (int i = 1; i <= m; ++i) {
-        int sz = p[i].size();
-        for (int j = 0; j < sz; ++j) {
-            t[p[i][(j+1)%sz]] = s[p[i][j]];
+string shiftCharacters(const string& str, const vector<vector<int>>& positions) {
+    string shifted(str);
+    for (const auto& position : positions) {
+        int size = position.size();
+        for (int i = 0; i < size; ++i) {
+            shifted[position[(i+1) % size]] = str[position[i]];
         }
     }
+    return shifted;
+}
 
-    cout << t << endl;
+int main() {
+    int length, numOfColors;
+    string str;
+    cin >> length >> numOfColors >> str;
+
+    vector<int> colors = readColors(length);
+    vector<vector<int>> positions = getPositions(colors, numOfColors);
+
+    string shiftedString = shiftCharacters(str, positions);
+
+    cout << shiftedString << endl;
 
     return 0;
 }
