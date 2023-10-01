@@ -19,23 +19,23 @@ int main() {
     int n, m;
     cin >> n >> m;
 
-    vector<int> a(m);
-    vector<int> ans(n, -1);
+    vector<int> fireworksDays(m);
+    vector<int> daysUntilFireworks(n, -1);
     for (int i = 0; i < m; ++i) {
-        cin >> a[i];
-        ans[a[i]-1] = 0;
+        cin >> fireworksDays[i];
+        daysUntilFireworks[fireworksDays[i]-1] = 0;
     }
 
-    int idxZero = 0;
+    int nextFireworkIdx = 0;
     for (int i = n-1; i >= 0; --i) {
-        if (ans[i] == 0) idxZero = i;
+        if (daysUntilFireworks[i] == 0) nextFireworkIdx = i;
         else {
-            ans[i] = idxZero - i;
+            daysUntilFireworks[i] = nextFireworkIdx - i;
         }
     }
 
-    for (int i = 0; i < n; ++i) {
-        cout << ans[i] << '\n';
+    for (const auto& days : daysUntilFireworks) {
+        cout << days << '\n';
     }
 
     return 0;
