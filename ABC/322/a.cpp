@@ -20,13 +20,12 @@ int main() {
     cin >> n >> s;
 
     for (int i = 0; i < n-2; ++i) {
-        string t = s.substr(i, 3);
-        if (t == "ABC") {
-            cout << i + 1 << endl;
+        if (s.substr(i, 3) == "ABC") {
+            cout << i + 1 << endl; // 1-indexedで出力
             return 0;
         }
     }
-    cout << -1 << endl;
+    cout << -1 << endl; // "ABC"が見つからなかった場合
 
     return 0;
 }
