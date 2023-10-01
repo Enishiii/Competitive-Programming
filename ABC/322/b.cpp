@@ -20,6 +20,7 @@ M の文字列
 */
 
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main() {
@@ -29,17 +30,12 @@ int main() {
     string s, t;
     cin >> s >> t;
 
-    bool prefix = true;
-    for (int i = 0; i < n; ++i) {
-        if (s[i] != t[i]) prefix = false;
-    }
+    bool isPrefix = (s == t.substr(0, n));
+    bool isSuffix = (s == t.substr(m-n, n));
 
-    bool suffix = true;
-    if (t.substr(m-n, n) != s) suffix = false;
-
-    if (prefix && suffix) cout << 0 << endl;
-    else if (prefix) cout << 1 << endl;
-    else if (suffix) cout << 2 << endl;
+    if (isPrefix && isSuffix) cout << 0 << endl;
+    else if (isPrefix) cout << 1 << endl;
+    else if (isSuffix) cout << 2 << endl;
     else cout << 3 << endl;
 
     return 0;
