@@ -13,14 +13,15 @@ X,Y は整数
 #include <iostream>
 using namespace std;
 
+int integerDivideCeil(int numerator, int denominator) {
+    return (numerator + denominator - 1) / denominator;
+}
+
 int main() {
     int x, y;
     cin >> x >> y;
 
-    int diff = y - x;
-    if (diff < 0) cout << 0 << endl;
-    else if (diff % 10 == 0) cout << diff / 10 << endl;
-    else cout << diff / 10 + 1 << endl;
+    cout << max(0, integerDivideCeil(y - x, 10)) << endl;
 
     return 0;
 }
