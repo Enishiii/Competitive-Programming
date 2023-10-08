@@ -17,7 +17,9 @@ int main() {
     string s;
     cin >> s;
 
-    cout << (s[0]-'0') * (s[2]-'0') << endl;
+    int product = (s[0] - '0') * (s[2] - '0');
+
+    cout << product << endl;
 
     return 0;
 }
