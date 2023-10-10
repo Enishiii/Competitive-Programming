@@ -12,19 +12,16 @@ N は整数である。
 */
 
 #include <iostream>
-#include <string>
+#include <iomanip>
 using namespace std;
 
 int main() {
     int n;
     cin >> n;
 
-    string ans = "AGC";
-    if (n < 10) ans += "00" + to_string(n);
-    if (n >= 10 && n > 41) ans += "0" + to_string(n+1);
-    if (n >= 10 && n <= 41) ans += "0" + to_string(n);
+    if (n >= 42) n++;
 
-    cout << ans << endl;
+    cout << "AGC" << setfill('0') << setw(3) << n << endl;
 
     return 0;
 }
