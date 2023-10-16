@@ -13,29 +13,21 @@ S1,S2 に # が合計で2 つ以上含まれる
 */
 
 #include <iostream>
-#include <vector>
 using namespace std;
 
+bool isNotConnected(const string& s1, const string& s2) {
+    return (s1 == "#." && s2 == ".#") || (s1 == ".#" && s2 == "#.");
+}
+
 int main() {
-    vector<string> s(2);
-    for (int i = 0; i < 2; ++i) cin >> s[i];
+    string s1, s2;
+    cin >> s1 >> s2;
 
-    int cnt = 0;
-    for (int i = 0; i < 2; ++i) {
-        for (int j = 0; j < 2; ++j) {
-            if (s[i][j] == '#') {
-                cnt++;
-            }
-        }
-    }
-
-    if (cnt > 2) {
-        cout << "Yes" << endl;
+    if (isNotConnected(s1, s2)) {
+        cout << "No" << endl;
     } else {
-        if ((s[0][0] == '#' && s[1][1] == '#') || (s[0][1] == '#' && s[1][0] == '#')) cout << "No" << endl;
-        else cout << "Yes" << endl;
+        cout << "Yes" << endl;
     }
-
 
     return 0;
 }
