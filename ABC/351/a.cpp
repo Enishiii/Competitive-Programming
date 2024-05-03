@@ -2,22 +2,21 @@
 using namespace std;
 
 int main() {
-    int a[9];
-    int b[8];
+    int a = 0;
+    int b = 0;
 
-    int a_sum = 0;
+    int inputNum;
     for (int i = 0; i < 9; ++i) {
-        cin >> a[i];
-        a_sum += a[i];
+        cin >> inputNum;
+        a += inputNum;
     }
 
-    int b_sum = 0;
     for (int i = 0; i < 8; ++i) {
-        cin >> b[i];
-        b_sum += b[i];
+        cin >> inputNum;
+        b += inputNum;
     }
 
-    cout << a_sum - b_sum + 1 << endl;
+    cout << a - b + 1 << endl;
 
     return 0;
 }
