@@ -1,20 +1,21 @@
 #include <iostream>
 using namespace std;
 
-int main() {
-    int a = 0;
-    int b = 0;
+int sumInputs(int count) {
+    int sum = 0;
 
     int inputNum;
-    for (int i = 0; i < 9; ++i) {
+    for (int i = 0; i < count; ++i) {
         cin >> inputNum;
-        a += inputNum;
+        sum += inputNum;
     }
 
-    for (int i = 0; i < 8; ++i) {
-        cin >> inputNum;
-        b += inputNum;
-    }
+    return sum;
+}
+
+int main() {
+    int a = sumInputs(9);
+    int b = sumInputs(8);
 
     cout << a - b + 1 << endl;
 
