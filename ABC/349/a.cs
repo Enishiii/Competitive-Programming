@@ -4,18 +4,16 @@ class Program
 {
     static void Main()
     {
-        int n = int.Parse(Console.ReadLine());
+        int numInputs = int.Parse(Console.ReadLine());
 
         string[] inputs = Console.ReadLine().Split(' ');
 
-        int sum = 0;
-        int x;
-        for (int i = 0; i < n-1; i++)
+        int total = 0;
+        for (int i = 0; i < numInputs-1; i++)
         {
-            x = int.Parse(inputs[i]);
-            sum += x;
+            total += int.Parse(inputs[i]);
         }
 
-        Console.WriteLine(-sum);
+        Console.WriteLine(-total);
     }
 }
