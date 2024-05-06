@@ -1,21 +1,28 @@
 #include <iostream>
-#include <string>
-#include <vector>
 using namespace std;
 
-int main() {
-    int n;
-    cin >> n;
+int readInputCount() {
+    int inputCount;
+    cin >> inputCount;
+    return inputCount;
+}
 
-    int sum = 0;
-    int x;
-    for (int i = 0; i < n-1; i++) {
-        cin >> x;
-        sum += x;
+int calculateTotal(int numCount) {
+    int total = 0;
+    int input;
+    for (int i = 0; i < numCount-1; i++) {
+        cin >> input;
+        total += input;
     }
+    return total;
+}
 
-    if (sum < 0) cout << 0 - sum << endl;
-    else cout << -sum << endl;
+int main() {
+    int inputCount = readInputCount();
+
+    int total = calculateTotal(inputCount);
+
+    cout << -total << endl;
 
     return 0;
 }
