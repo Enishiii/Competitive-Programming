@@ -1,16 +1,27 @@
 #include <iostream>
-#include <string>
+#include <sstream>
 using namespace std;
 
-int main() {
-    int n;
-    cin >> n;
+int readInputCount() {
+    int inputCount;
+    cin >> inputCount;
+    return inputCount;
+}
 
-    for (int i = 1; i <= n; ++i) {
-        if (i % 3 == 0) cout << "x";
-        else cout << "o";
+string generateOutputString(int inputCount) {
+    stringstream ss;
+    for (int i = 1; i <= inputCount; ++i) {
+        ss << ((i % 3 == 0) ? 'x' : 'o');
     }
-    cout << endl;
+    return ss.str();
+}
+
+int main() {
+    int inputCount = readInputCount();
+
+    string output = generateOutputString(inputCount);
+
+    cout << output << endl;
 
     return 0;
 }
