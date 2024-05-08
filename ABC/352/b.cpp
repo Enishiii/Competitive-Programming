@@ -1,20 +1,28 @@
 #include <iostream>
-#include <sstream>
-#include <string>
 using namespace std;
 
-int main() {
-    string s, t;
-    cin >> s >> t;
+string readInputString() {
+    string input;
+    cin >> input;
+    return input;
+}
 
-    int s_index = 0;
-    for (int i = 0; i < t.size(); ++i) {
-        if (t[i] == s[s_index]) {
+void printMatchingPositions(const string& target, const string& source) {
+    int targetIndex = 0;
+    for (int i = 0; i < source.size(); i++) {
+        if (source[i] == target[targetIndex]) {
             cout << i + 1 << " ";
-            s_index++;
+            targetIndex++;
         }
     }
     cout << endl;
+}
+
+int main() {
+    string target = readInputString();
+    string source = readInputString();
+
+    printMatchingPositions(target, source);
 
     return 0;
 }
