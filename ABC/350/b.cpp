@@ -2,26 +2,46 @@
 #include <vector>
 using namespace std;
 
+int readInputNumber() {
+    int inputNumber;
+    cin >> inputNumber;
+    return inputNumber;
+}
+
+vector<int> readTreatments(int treatmentCount) {
+    vector<int> treatments(treatmentCount);
+    for (int i = 0; i < treatmentCount; ++i) {
+        cin >> treatments[i];
+    }
+    return treatments;
+}
+
+int calcTotalTeeth(int toothCount, const vector<int>& treatments) {
+    vector<int> toothState(toothCount, 1);
+    for (int treatment : treatments) {
+        toothState[treatment - 1] = (toothState[treatment - 1] == 0) ? 1 : 0;
+    }
+
+    int totalTeeth = 0;
+    for (int state : toothState) {
+        totalTeeth += (state == 0) ? 0 : 1;
+    }
+    return totalTeeth;
+}
+
+void printTotalTeeth(int totalTeeth) {
+    cout << totalTeeth << endl;
+}
+
 int main() {
-    int n, q;
-    cin >> n >> q;
+    int toothCount = readInputNumber();
+    int treatmentCount = readInputNumber();
 
-    vector<int> t(q);
-    vector<bool> state(n, true);
+    vector<int> treatments = readTreatments(treatmentCount);
 
-    for (int i = 0; i < q; ++i) {
-        cin >> t[i];
+    int totalTeethAfterTreatments = calcTotalTeeth(toothCount, treatments);
 
-        if (state[t[i]-1]) state[t[i]-1] = false;
-        else if (!state[t[i]-1]) state[t[i]-1] = true;
-    }
-
-    int ans = 0;
-    for (int i = 0; i < n; ++i) {
-        if (state[i]) ans++;
-    }
-
-    cout << ans << endl;
+    printTotalTeeth(totalTeethAfterTreatments);
 
     return 0;
 }
