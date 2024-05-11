@@ -1,24 +1,24 @@
 #include <iostream>
 #include <vector>
-#include <map>
+#include <array>
 using namespace std;
 
 int main() {
     string s;
     cin >> s;
 
-    map <char, int> mp;
-    map <int, int> mp2;
-    for (int i = 0; i < s.size(); ++i) {
-        mp[s[i]]++;
+    array<int, 26> cnt = {0};
+    for (char c : s) {
+        cnt[c - 'a']++;
     }
 
-    for (char c = 'a'; c <= 'z'; ++c) {
-        mp2[mp[c]]++;
+    array<int, 101> cnt2 = {0};
+    for (int c : cnt) {
+        if (c > 0) cnt2[c]++;
     }
 
-    for (int i = 1; i <= s.size(); ++i) {
-        if (!(mp2[i] == 0 || mp2[i] == 2)) {
+    for (int c : cnt2) {
+        if (!(c == 0 || c == 2)) {
             cout << "No" << endl;
             return 0;
         }
