@@ -3,27 +3,51 @@
 #include <array>
 using namespace std;
 
-int main() {
-    string s;
-    cin >> s;
+string readInputString() {
+    string inputString;
+    cin >> inputString;
+    return inputString;
+}
 
-    array<int, 26> cnt = {0};
-    for (char c : s) {
-        cnt[c - 'a']++;
+array<int, 26> countCharOccurrences(const string& inputString) {
+    array<int, 26> charCounts = {0};
+    for (char c : inputString) {
+        charCounts[c - 'a']++;
     }
+    return charCounts;
+}
 
-    array<int, 101> cnt2 = {0};
-    for (int c : cnt) {
-        if (c > 0) cnt2[c]++;
-    }
-
-    for (int c : cnt2) {
-        if (!(c == 0 || c == 2)) {
-            cout << "No" << endl;
-            return 0;
+array<int, 101> countTypeOccurrences(const array<int, 26>& charOccurrences) {
+    array<int, 101> typeCounts = {0};
+    for (int c : charOccurrences) {
+        if (c > 0) {
+            typeCounts[c]++;
         }
     }
-    cout << "Yes" << endl;
+    return typeCounts;
+}
+
+bool isGoodString(const array<int, 101>& typeOccurrences) {
+    for (int count : typeOccurrences) {
+        if (count != 0 && count != 2) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void printIsGoodString(bool isGood) {
+    cout << (isGood == true ? "Yes" : "No") << endl;
+}
+
+int main() {
+    string inputString = readInputString();
+
+    array<int, 26> charOccurrences = countCharOccurrences(inputString);
+
+    array<int, 101> typeOccurrences = countTypeOccurrences(charOccurrences);
+
+    printIsGoodString(isGoodString(typeOccurrences));
 
     return 0;
 }
