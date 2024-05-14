@@ -9,19 +9,13 @@ int main() {
     vector<int> h(n);
     for (int i = 0; i < n; ++i) cin >> h[i];
 
-    int left = h[0];
-    bool isExists = false;
-    int index = -1;
-
     for (int i = 1; i < n; ++i) {
-        if (h[i] > left) {
-            isExists = true;
-            index = i + 1;
-            break;
+        if (h[i] > h[0]) {
+            cout << i + 1 << endl;
+            return 0;
         }
     }
-
-    cout << index << endl;
+    cout << -1 << endl;
 
     return 0;
 }
