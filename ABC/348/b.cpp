@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <cmath>
 using namespace std;
 
 int main() {
@@ -14,12 +13,12 @@ int main() {
 
     for (int i = 0; i < n; ++i) {
         int indexOfMaxEuclideanDistance = -1;
-        double maxEuclideanDistance = 0;
+        int maxEuclideanDistance = 0;
 
         for (int j = 0; j < n; ++j) {
             if (i == j) continue;
 
-            double euclideanDistance = sqrt((x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j]));
+            int euclideanDistance = (x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j]);
 
             if (maxEuclideanDistance < euclideanDistance) {
                 indexOfMaxEuclideanDistance = j + 1;
