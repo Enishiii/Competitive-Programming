@@ -6,18 +6,16 @@ int main() {
     int n, k;
     cin >> n >> k;
 
-    vector<int> ans;
-    for (int i = 0; i < n; ++i) {
-        int a;
-        cin >> a;
+    // nの値チェック（0, 負の値, 数値型か）
+    // kの値チェック(0, 負の値, 数値型か)
 
-        if (a % k == 0) {
-            ans.push_back(a / k);
+    vector<int> divisibleNumbers(n);
+    for (int i = 0; i < n; ++i) cin >> divisibleNumbers[i];
+
+    for (int number : divisibleNumbers) {
+        if (number % k == 0) {
+            cout << number / k << " ";
         }
-    }
-
-    for (int a : ans) {
-        cout << a << " ";
     }
     cout << endl;
 
