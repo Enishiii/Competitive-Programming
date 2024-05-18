@@ -1,34 +1,19 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include <set>
+#include <string>
 using namespace std;
 
 int main() {
     string s;
     cin >> s;
 
-    int ans = 0;
-    vector<int> charCount(26, 0);
-    vector<string> patterns;
-
+    set<string> st;
     for (int i = 0; i < s.size(); ++i) {
-        charCount[s[i] - 'a']++;
-        if (charCount[s[i] - 'a'] == 1) ans++;
-
-        string tmp = "";
-        tmp += s[i];
-
-        for (int j = i + 1; j < s.size(); ++j) {
-            tmp += s[j];
-            if (count(begin(patterns), end(patterns), tmp)) {
-                continue;
-            }
-
-            ans++;
-            patterns.push_back(tmp);
+        for (int j = 1; i + j <= s.size(); ++j) {
+            st.insert(s.substr(i, j));
         }
     }
-    cout << ans << endl;
+    cout << st.size() << endl;
 
     return 0;
 }
