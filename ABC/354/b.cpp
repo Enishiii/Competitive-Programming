@@ -4,20 +4,20 @@
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
+    int numUsers;
+    cin >> numUsers;
 
-    vector<string> s(n);
-    vector<int> c(n);
-    int sum = 0;
+    vector<string> usernames(numUsers);
+    vector<int> ratings(numUsers);
+    int totalRatings = 0;
 
-    for (int i = 0; i < n; ++i) {
-        cin >> s[i] >> c[i];
-        sum += c[i];
+    for (int i = 0; i < numUsers; ++i) {
+        cin >> usernames[i] >> ratings[i];
+        totalRatings += ratings[i];
     }
 
-    sort(s.begin(), s.end());
-    cout << s[sum % n] << endl;
+    sort(usernames.begin(), usernames.end());
+    cout << usernames[totalRatings % numUsers] << endl;
 
     return 0;
 }
