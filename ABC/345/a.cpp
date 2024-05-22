@@ -1,22 +1,24 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main() {
-    string s;
-    cin >> s;
+    string targetString;
+    cin >> targetString;
 
-    bool isLeftRightArrow = true;
-
-    if (s[0] != '<') isLeftRightArrow = false;
-
-    if (s[s.size()-1] != '>') isLeftRightArrow = false;
-
-    for (int i = 1; i < s.size()-1; ++i) {
-        if (s[i] != '=') isLeftRightArrow = false;
+    if (targetString.front() != '<' || targetString.back() != '>') {
+        cout << "No" << endl;
+        return 0;
     }
 
-    if (isLeftRightArrow) cout << "Yes" << endl;
-    else cout << "No" << endl;
+    for (size_t i = 1; i < targetString.size() - 1; ++i) {
+        if (targetString[i] != '=') {
+            cout << "No" << endl;
+            return 0;
+        }
+    }
+
+    cout << "Yes" << endl;
 
     return 0;
 }
