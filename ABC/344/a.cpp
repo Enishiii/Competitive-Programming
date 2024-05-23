@@ -1,24 +1,17 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main() {
-    string s;
-    cin >> s;
+    string inputString;
+    cin >> inputString;
 
-    bool isBetween = false;
-    string ans = "";
+    size_t firstPosition = inputString.find('|');
+    size_t secondPosition = inputString.find('|', firstPosition + 1);
 
-    for (int i = 0; i < s.size(); ++i) {
-        if (s[i] == '|') {
-            isBetween = (isBetween == true) ? false : true;
-            continue;
-        }
+    string extractedString = inputString.substr(0, firstPosition) + inputString.substr(secondPosition + 1);
 
-        if (!isBetween) {
-            ans += s[i];
-        }
-    }
-    cout << ans << endl;
+    cout << extractedString << endl;
 
     return 0;
 }
