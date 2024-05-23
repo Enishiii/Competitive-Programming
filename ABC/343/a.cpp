@@ -5,12 +5,8 @@ int main() {
     int a, b;
     cin >> a >> b;
 
-    for (int i = 0; i < 10; ++i) {
-        if (i != (a + b)) {
-            cout << i << endl;
-            return 0;
-        }
-    }
+    int notSum = (a + b == 0) ? 1 : 0;
+    cout << notSum << endl;
 
     return 0;
 }
