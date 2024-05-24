@@ -1,20 +1,33 @@
 #include <iostream>
 using namespace std;
 
+const int ADJUSTMENT = 9;
+const int DIVISOR = 10;
+
+long long adjustInput(long long inputNumber) {
+    return inputNumber + ADJUSTMENT;
+}
+
+long long calcRoundedResult(long long adjusted) {
+    return adjusted / DIVISOR;
+}
+
+long long adjustForNegative(long long adjusted, long long divided) {
+    if (adjusted <= 0 && adjusted % DIVISOR != 0) {
+        divided--;
+    }
+    return divided;
+}
+
 int main() {
-    long long x;
-    cin >> x;
+    long long inputNumber;
+    cin >> inputNumber;
 
-    if (x % 10 == 0) {
-        cout << x / 10 << endl;
-        return 0;
-    }
+    long long adjusted = adjustInput(inputNumber);
+    long long divided = calcRoundedResult(adjusted);
+    long long result = adjustForNegative(adjusted, divided);
 
-    if (x >= 0) {
-        cout << (x + 10 - 1) / 10 << endl;
-    } else {
-        cout << x / 10 << endl;
-    }
+    cout << result << endl;
 
     return 0;
 }
