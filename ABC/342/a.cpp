@@ -1,28 +1,21 @@
 #include <iostream>
+#include <unordered_map>
 using namespace std;
 
 int main() {
     string s;
     cin >> s;
 
-    char a = s[0];
-    char b;
-    int noA = 0;
-    for (int i = 1; i < s.size(); ++i) {
-        if (s[i] != a) {
-            b = s[i];
-            noA++;
-        }
+    unordered_map<char, int> charCount;
+
+    for (char c : s) {
+        charCount[c]++;
     }
 
-    if (noA > 1) {
-        cout << 1 << endl;
-    } else {
-        for (int i = 1; i < s.size(); ++i) {
-            if (s[i] == b) {
-                cout << i + 1 << endl;
-                return 0;
-            }
+    for (int i = 0; i < s.size(); ++i) {
+        if (charCount[s[i]] == 1) {
+            cout << i + 1 << endl;
+            return 0;
         }
     }
 
