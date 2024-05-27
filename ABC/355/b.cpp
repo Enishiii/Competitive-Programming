@@ -1,37 +1,44 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <set>
 using namespace std;
 
-int main() {
-    int n, m;
-    cin >> n >> m;
-
-    vector<int> a(n);
-    vector<int> c(n+m);
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
-        c[i] = a[i];
+vector<int> readArray(int size) {
+    vector<int> array(size);
+    for (auto& element : array) {
+        cin >> element;
     }
+    return array;
+}
 
-    vector<int> b(m);
-    for (int i = 0; i < m; ++i) {
-        cin >> b[i];
-        c[n+i] = b[i];
-    }
+vector<int> createCombinedArray(const vector<int>& array1, const vector<int>& array2) {
+    vector<int> combined(array1);
+    combined.insert(combined.end(), array2.begin(), array2.end());
+    sort(combined.begin(), combined.end());
+    return combined;
+}
 
-    sort(c.begin(), c.end());
-    sort(a.begin(), a.end());
-
-    for (int i = 0; i < n+m-1; ++i) {
-        for (int j = 0; j < n-1; ++j) {
-            if (c[i] == a[j] && c[i+1] == a[j+1]) {
-                cout << "Yes" << endl;
-                return 0;
-            }
+bool hasAdjacentElementsInSet(const vector<int>& array, const set<int>& elements) {
+    for (size_t i = 0; i < array.size() - 1; ++i) {
+        if (elements.contains(array[i]) && elements.contains(array[i+1])) {
+            return true;
         }
     }
-    cout << "No" << endl;
+    return false;
+}
+
+int main() {
+    int size1, size2;
+    cin >> size1 >> size2;
+
+    vector<int> array1 = readArray(size1);
+    vector<int> array2 = readArray(size2);
+
+    set<int> elements(array1.begin(), array1.end());
+    vector<int> combined = createCombinedArray(array1, array2);
+
+    cout << (hasAdjacentElementsInSet(combined, elements) ? "Yes" : "No") << endl;
 
     return 0;
 }
