@@ -3,19 +3,20 @@
 using namespace std;
 
 int main() {
-    vector<int> a;
+    vector<int> numbers;
 
     while(true) {
-        int x;
-        cin >> x;
+        int input;
+        cin >> input;
+
         if (cin.fail()) break;
 
-        a.push_back(x);
+        numbers.push_back(input);
     }
 
-    int n = a.size();
-    for (int i = n-1; i >= 0; --i) {
-        cout << a[i] << endl;
+    int size = numbers.size();
+    for (int i = size-1; i >= 0; --i) {
+        cout << numbers[i] << endl;
     }
 
     return 0;
