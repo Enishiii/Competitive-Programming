@@ -19,10 +19,10 @@ void printOnesIndices(const vector<vector<int>>& matrix) {
 
     for (int row = 0; row < size; ++row) {
         for (int col = 0; col < size; ++col) {
-            if (matrix[row][col] == 1) {
-                cout << col + 1;
-                if (col != size - 1) cout << " ";
-            }
+            if (matrix[row][col] != 1) continue;
+
+            cout << col + 1;
+            if (col != size - 1) cout << " ";
         }
         cout << endl;
     }
