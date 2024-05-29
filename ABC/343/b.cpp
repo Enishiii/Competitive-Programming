@@ -2,25 +2,39 @@
 #include <vector>
 using namespace std;
 
-int main() {
-    int n;
-    cin >> n;
+vector<vector<int>> readMatrix(int size) {
+    vector<vector<int>> matrix(size, vector<int>(size));
 
-    vector<vector<int>> a(n, vector<int>(n));
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
-            cin >> a[i][j];
+    for (int row = 0; row < size; ++row) {
+        for (int col = 0; col < size; ++col) {
+            cin >> matrix[row][col];
         }
     }
 
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
-            if (a[i][j] == 1) {
-                cout << j+1 << " ";
+    return matrix;
+}
+
+void printOnesIndices(const vector<vector<int>>& matrix) {
+    int size = matrix.size();
+
+    for (int row = 0; row < size; ++row) {
+        for (int col = 0; col < size; ++col) {
+            if (matrix[row][col] == 1) {
+                cout << col + 1;
+                if (col != size - 1) cout << " ";
             }
         }
         cout << endl;
     }
+}
+
+int main() {
+    int matrixSize;
+    cin >> matrixSize;
+
+    vector<vector<int>> matrix = readMatrix(matrixSize);
+
+    printOnesIndices(matrix);
 
     return 0;
 }
