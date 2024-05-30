@@ -1,31 +1,48 @@
 #include <iostream>
 #include <vector>
-#include <map>
 using namespace std;
 
-int main() {
-    int personCount;
-    cin >> personCount;
+int readInt() {
+    int input;
+    cin >> input;
+    return input;
+}
 
-    vector<int> personPositions(personCount);
-    map<int, int> personIndexMap;
-    for (int i = 0; i < personCount; ++i) {
-        cin >> personPositions[i];
-        personIndexMap[personPositions[i]] = i + 1;
+vector<int> createPersonIndex(int personCount) {
+    vector<int> personIndex(personCount + 1, 0);
+
+    for (int i = 1; i <= personCount; ++i) {
+        int person;
+        cin >> person;
+
+        personIndex[person] = i;
     }
 
-    int queryCount;
-    cin >> queryCount;
+    return personIndex;
+}
+
+void printEarlierPerson(const vector<int>& personIndex, int personA, int personB) {
+
+    if (personIndex[personA] > personIndex[personB]) {
+        cout << personB << endl;
+    } else {
+        cout << personA << endl;
+    }
+
+}
+
+int main() {
+    int personCount = readInt();
+
+    vector<int> personIndex = createPersonIndex(personCount);
+
+    int queryCount = readInt();
 
     for (int i = 0; i < queryCount; ++i) {
-        int personA, personB;
-        cin >> personA >> personB;
+        int personA = readInt();
+        int personB = readInt();
 
-        if (personIndexMap[personA] > personIndexMap[personB]) {
-            cout << personB << endl;
-        } else {
-            cout << personA << endl;
-        }
+        printEarlierPerson(personIndex, personA, personB);
     }
 
     return 0;
