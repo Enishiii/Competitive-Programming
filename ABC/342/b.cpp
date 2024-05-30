@@ -1,32 +1,30 @@
 #include <iostream>
 #include <vector>
-#include <set>
-#include <algorithm>
 #include <map>
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
+    int personCount;
+    cin >> personCount;
 
-    vector<int> p(n);
-    map<int, int> mp;
-    for (int i = 0; i < n; ++i) {
-        cin >> p[i];
-        mp[p[i]] = i+1;
+    vector<int> personPositions(personCount);
+    map<int, int> personIndexMap;
+    for (int i = 0; i < personCount; ++i) {
+        cin >> personPositions[i];
+        personIndexMap[personPositions[i]] = i + 1;
     }
 
-    int q;
-    cin >> q;
+    int queryCount;
+    cin >> queryCount;
 
-    for (int i = 0; i < q; ++i) {
-        int a, b;
-        cin >> a >> b;
+    for (int i = 0; i < queryCount; ++i) {
+        int personA, personB;
+        cin >> personA >> personB;
 
-        if (mp[a] > mp[b]) {
-            cout << b << endl;
+        if (personIndexMap[personA] > personIndexMap[personB]) {
+            cout << personB << endl;
         } else {
-            cout << a << endl;
+            cout << personA << endl;
         }
     }
 
