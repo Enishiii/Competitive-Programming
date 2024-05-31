@@ -7,53 +7,53 @@ const int RIGHT = 1;
 const int DOWN = 2;
 const int LEFT = 3;
 
-int turnRight(int dir) {
-    return (dir + 1) % 4;
+int turnRight(int direction) {
+    return (direction + 1) % 4;
 }
 
-int turnLeft(int dir) {
-    return (dir + 3) % 4;
+int turnLeft(int direction) {
+    return (direction + 3) % 4;
 }
 
 int main() {
-    int h, w, n;
-    cin >> h >> w >> n;
+    int height, width, numOperations;
+    cin >> height >> width >> numOperations;
 
-    vector<vector<bool>> grid(h, vector<bool>(w, false));
+    vector<vector<bool>> grid(height, vector<bool>(width, false));
 
-    int row = 0;
-    int col = 0;
-    int dir = UP;
+    int currentRow = 0;
+    int currentCol = 0;
+    int direction = UP;
 
-    for (int i = 0; i < n; ++i) {
-        bool isWhite = !grid[row][col];
+    for (int i = 0; i < numOperations; ++i) {
+        bool isWhite = !grid[currentRow][currentCol];
 
-        grid[row][col] = !grid[row][col];
+        grid[currentRow][currentCol] = !grid[currentRow][currentCol];
 
         if (isWhite) {
-            dir = turnRight(dir);
+            direction = turnRight(direction);
         } else {
-            dir = turnLeft(dir);
+            direction = turnLeft(direction);
         }
 
-        switch(dir) {
+        switch(direction) {
             case UP:
-                row = (row - 1 + h) % h;
+                currentRow = (currentRow - 1 + height) % height;
                 break;
             case RIGHT:
-                col = (col + 1) % w;
+                currentCol = (currentCol + 1) % width;
                 break;
             case DOWN:
-                row = (row + 1) % h;
+                currentRow = (currentRow + 1) % height;
                 break;
             case LEFT:
-                col = (col - 1 + w) % w;
+                currentCol = (currentCol - 1 + width) % width;
                 break;
         }
     }
 
-    for (int i = 0; i < h; ++i) {
-        for (int j = 0; j < w; ++j) {
+    for (int i = 0; i < height; ++i) {
+        for (int j = 0; j < width; ++j) {
             cout << (grid[i][j] ? '#' : '.');
         }
         cout << endl;
