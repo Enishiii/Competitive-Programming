@@ -1,15 +1,26 @@
 #include <iostream>
 using namespace std;
 
-int main() {
-    int a, b, d;
-    cin >> a >> b >> d;
+struct Range {
+    int start;
+    int end;
+    int step;
+};
 
-    for (int i = a; i <= b; i += d) {
+void printRange(Range range) {
+    for (int i = range.start; i <= range.end; i += range.step) {
         cout << i;
-        if (i != b) cout << " ";
+        if (i != range.end) cout << " ";
     }
     cout << endl;
+}
+
+int main() {
+    int start, end, step;
+    cin >> start >> end >> step;
+
+    Range range = {start, end, step};
+    printRange(range);
 
     return 0;
 }
