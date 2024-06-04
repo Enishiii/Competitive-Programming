@@ -1,19 +1,25 @@
 #include <iostream>
 using namespace std;
 
-int main() {
-    string s;
-    cin >> s;
-
+string turnIntoTDLFrom(const string& str) {
     int dotPosition = -1;
-    for (int i = s.size() - 1; i >= 0; --i) {
-        if (s[i] != '.') continue;
+    for (int i = str.size() - 1; i >= 0; --i) {
+        if (str[i] != '.') continue;
 
         dotPosition = i;
         break;
     }
 
-    cout << s.substr(dotPosition + 1) << endl;
+    return str.substr(dotPosition + 1);
+}
+
+int main() {
+    string inputString;
+    cin >> inputString;
+
+    string topLevelDomain = turnIntoTDLFrom(inputString);
+
+    cout << topLevelDomain << endl;
 
     return 0;
 }
