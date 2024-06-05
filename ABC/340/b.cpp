@@ -2,25 +2,27 @@
 #include <vector>
 using namespace std;
 
-int readInt() {
-    int inputNumber;
-    cin >> inputNumber;
-    return inputNumber;
+// 任意の型の値を入力
+template <typename T>
+T readValue() {
+    T value;
+    cin >> value;
+    return value;
 }
 
 int main() {
-    int queryCount = readInt();
+    int queryCount = readValue<int>();
 
     vector<int> array;
     for (int i = 0; i < queryCount; ++i) {
-        int queryType = readInt();
+        int queryType = readValue<int>();
 
         if (queryType == 1) {
-            int value = readInt();
+            int value = readValue<int>();
 
             array.push_back(value);
         } else if (queryType == 2) {
-            int position = readInt();
+            int position = readValue<int>();
 
             // array.end()[-position]とも書ける
             cout << array[array.size() - position] << endl;
