@@ -1,28 +1,29 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
+int readInt() {
+    int inputNumber;
+    cin >> inputNumber;
+    return inputNumber;
+}
+
 int main() {
-    int queryCount;
-    cin >> queryCount;
+    int queryCount = readInt();
 
-    vector<int> appendedArray;
-    vector<int> reversedArray;
+    vector<int> array;
     for (int i = 0; i < queryCount; ++i) {
-        int type;
-        cin >> type;
+        int queryType = readInt();
 
-        if (type == 1) {
-            int x;
-            cin >> x;
-            appendedArray.push_back(x);
-            reversedArray = appendedArray;
-            reverse(reversedArray.begin(), reversedArray.end());
-        } else if (type == 2) {
-            int k;
-            cin >> k;
-            cout << reversedArray[k-1] << endl;
+        if (queryType == 1) {
+            int value = readInt();
+
+            array.push_back(value);
+        } else if (queryType == 2) {
+            int position = readInt();
+
+            // array.end()[-position]とも書ける
+            cout << array[array.size() - position] << endl;
         }
     }
 
