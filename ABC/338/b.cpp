@@ -1,31 +1,30 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
-#include <map>
+#include <unordered_map>
 using namespace std;
 
+char findMostFrequentChar(string s) {
+    unordered_map<char, int> charCounts;
+    for (char c : s) {
+        charCounts[c]++;
+    }
+
+    char mostFrequentChar;
+    int maxCount = 0;
+    for (auto const&[character, count] : charCounts) {
+        if (count > maxCount || (count == maxCount && character < mostFrequentChar)) {
+            maxCount = count;
+            mostFrequentChar = character;
+        }
+    }
+    return mostFrequentChar;
+}
 
 int main() {
     string s;
     cin >> s;
 
-    map<char, int> charCount;
-    for (int i = 0; i < s.size(); ++i) {
-        charCount[s[i]]++;
-    }
-
-    int maxChar = -1;
-    for (int i = 0; i < s.size(); ++i) {
-        maxChar = max(maxChar, charCount[s[i]]);
-    }
-
-    sort(s.begin(), s.end());
-    for (int i = 0; i < s.size(); ++i) {
-        if (charCount[s[i]] == maxChar) {
-            cout << s[i] << endl;
-            return 0;
-        }
-    }
+    char result = findMostFrequentChar(s);
+    cout << result << endl;
 
     return 0;
 }
