@@ -2,7 +2,7 @@
 #include <unordered_map>
 using namespace std;
 
-char findMostFrequentChar(string s) {
+char findMostFrequentChar(const string& s) {
     unordered_map<char, int> charCounts;
     for (char c : s) {
         charCounts[c]++;
