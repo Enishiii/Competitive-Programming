@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-void printCombinations(int n) {
-    for (int x = 0; x <= n; ++x) {
-        for (int y = 0; y <= n; ++y) {
-            for (int z = 0; z <= n; ++z) {
-                if ((x + y + z) > n) continue;
+void printTetrahedralNumbers(int maxNumber) {
+    for (int x = 0; x <= maxNumber; ++x) {
+        for (int y = 0; y <= maxNumber; ++y) {
+            for (int z = 0; z <= maxNumber; ++z) {
+                if ((x + y + z) > maxNumber) continue;
 
                 cout << x << " " << y << " " << z << endl;
             }
@@ -14,10 +14,10 @@ void printCombinations(int n) {
 }
 
 int main() {
-    int n;
-    cin >> n;
+    int maxNumber;
+    cin >> maxNumber;
 
-    printCombinations(n);
+    printTetrahedralNumbers(maxNumber);
 
     return 0;
 }
