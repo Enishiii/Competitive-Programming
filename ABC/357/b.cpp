@@ -1,26 +1,23 @@
 #include <iostream>
+#include <algorithm>
+#include <string>
 using namespace std;
 
+string convertCase(string s) {
+    int lowerCount = count_if(s.begin(), s.end(), ::islower);
+    if (lowerCount * 2 < s.size()) {
+        transform(s.begin(), s.end(), s.begin(), ::toupper);
+        return s;
+    }
+    transform(s.begin(), s.end(), s.begin(), ::tolower);
+    return s;
+}
 
 int main() {
     string s;
     cin >> s;
 
-    int lower = 0, upper = 0;
-    for (auto& c : s) {
-        (islower(c) ? lower : upper)++;
-    }
-
-    if (lower < upper) {
-        for (auto& c : s) {
-            if (islower(c)) c = toupper(c);
-        }
-    } else {
-        for (auto& c : s) {
-            if (isupper(c)) c = tolower(c);
-        }
-    }
-    cout << s << "\n";
+    cout << convertCase(s) << endl;
 
     return 0;
 }
