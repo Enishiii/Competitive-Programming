@@ -1,30 +1,33 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
+int findSecondLargest(const vector<int>& numbers) {
+    int largest = *max_element(numbers.begin(), numbers.end());
+    int secondLargest = -1;
+
+    for (int number : numbers) {
+        if (number == largest) continue;
+
+        secondLargest = max(secondLargest, number);
+    }
+
+    return secondLargest;
+}
+
 int main() {
-    int n;
-    cin >> n;
+    int elementCount;
+    cin >> elementCount;
 
-    vector<int> a(n);
-    int mx = -1;
-
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
-
-        if (a[i] > mx) {
-            mx = a[i];
-        }
+    vector<int> numbers(elementCount);
+    for (int i = 0; i < elementCount; ++i) {
+        cin >> numbers[i];
     }
 
-    int secondMx = -1;
-    for (int i = 0; i < n; ++i) {
-        if (a[i] == mx) continue;
+    int secondLargest = findSecondLargest(numbers);
 
-        if (secondMx < a[i]) secondMx = a[i];
-    }
-
-    cout << secondMx << endl;
+    cout << secondLargest << endl;
 
     return 0;
 }
