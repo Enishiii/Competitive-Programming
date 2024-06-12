@@ -9,10 +9,12 @@ int main() {
         for (int tensDigit = 0; tensDigit <= 9; tensDigit++) {
             for (int onesDigit = 0; onesDigit <= 9; onesDigit++) {
                 int generatedNumber = hundredsDigit * 100 + tensDigit * 10 + onesDigit;
-                if (generatedNumber >= inputValue && hundredsDigit * tensDigit == onesDigit) {
-                    cout << generatedNumber << endl;
-                    return 0;
-                }
+                if (generatedNumber < inputValue) continue;
+
+                if (hundredsDigit * tensDigit != onesDigit) continue;
+
+                cout << generatedNumber << endl;
+                return 0;
             }
         }
     }
