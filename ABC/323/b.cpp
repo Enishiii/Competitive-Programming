@@ -4,25 +4,43 @@
 #include <numeric>
 using namespace std;
 
-int main() {
-    int n;
-    cin >> n;
-    vector<int> win(n), p(n);
-    iota(p.begin(), p.end(), 0);
+vector<int> initializeIndices(const int& n) {
+    vector<int> indices(n);
+    iota(indices.begin(), indices.end(), 0);
+    return indices;
+}
 
+vector<int> countWins(const int& n) {
+    vector<int> wins(n);
     for (int i = 0; i < n; ++i) {
         string s;
         cin >> s;
-        win[i] = count(s.begin(), s.end(), 'o');
+        wins[i] = count(s.begin(), s.end(), 'o');
     }
+    return wins;
+}
 
-    stable_sort(p.begin(), p.end(), [&](int i, int j) {
-        return win[i] > win[j];
+void sortIndices(vector<int>& indices, const vector<int>& wins) {
+    stable_sort(indices.begin(), indices.end(), [&](int i, int j) {
+        return wins[i] > wins[j];
     });
+}
 
+void printResults(const vector<int>& indices) {
+    int n = indices.size();
     for (int i = 0; i < n; ++i) {
-        cout << p[i] + 1 << (i == n - 1 ? '\n' : ' ');
+        cout << indices[i] + 1 << (i == n - 1 ? '\n' : ' ');
     }
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> indices = initializeIndices(n);
+    vector<int> wins = countWins(n);
+
+    sortIndices(indices, wins);
+    printResults(indices);
 
     return 0;
 }
