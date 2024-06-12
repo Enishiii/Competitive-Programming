@@ -2,18 +2,19 @@
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
+    int inputValue;
+    cin >> inputValue;
 
-    while(true) {
-        int ichi = (n % 100) % 10;
-        int hyakutojuu = (n / 100) * (n % 100 / 10);
-
-        if (ichi == hyakutojuu) {
-            cout << n << endl;
-            return 0;
+    for (int hundredsDigit = 1; hundredsDigit <= 9; hundredsDigit++) {
+        for (int tensDigit = 0; tensDigit <= 9; tensDigit++) {
+            for (int onesDigit = 0; onesDigit <= 9; onesDigit++) {
+                int generatedNumber = hundredsDigit * 100 + tensDigit * 10 + onesDigit;
+                if (generatedNumber >= inputValue && hundredsDigit * tensDigit == onesDigit) {
+                    cout << generatedNumber << endl;
+                    return 0;
+                }
+            }
         }
-        n++;
     }
 
     return 0;
