@@ -1,26 +1,40 @@
 #include <iostream>
 using namespace std;
 
-int main() {
-    int k, g, m;
-    cin >> k >> g >> m;
+class LiquidManager {
+public:
+    LiquidManager(int maxGlass, int maxMug): maxGlass_(maxGlass), maxMug_(maxMug), currentGlass_(0), currentMug_(0) {}
 
-    int glass = 0, mug = 0;
-    for (int i = 0; i < k; ++i) {
-
-        if (glass == g) {
-            glass = 0;
-        } else if (mug == 0) {
-            mug = m;
-        } else {
-            while(true) {
-                mug--;
-                glass++;
-                if (mug == 0 || glass == g) break;
+    void transferLiquid(int transferCount) {
+        for (int i = 0; i < transferCount; ++i) {
+            if (currentGlass_ == maxGlass_) currentGlass_ = 0;
+            else if (currentMug_ == 0) currentMug_ = maxMug_;
+            else {
+                int transferable = min(maxGlass_ - currentGlass_, currentMug_);
+                currentGlass_ += transferable;
+                currentMug_ -= transferable;
             }
         }
     }
-    cout << glass << " " << mug << endl;
+
+    void printFinalLiquidStatus() {
+        cout << currentGlass_ << " " << currentMug_ << endl;
+    }
+
+private:
+    int maxGlass_;
+    int maxMug_;
+    int currentGlass_;
+    int currentMug_;
+};
+
+int main() {
+    int transferCount, maxGlass, maxMug;
+    cin >> transferCount >> maxGlass >> maxMug;
+
+    LiquidManager lm(maxGlass, maxMug);
+    lm.transferLiquid(transferCount);
+    lm.printFinalLiquidStatus();
 
     return 0;
 }
