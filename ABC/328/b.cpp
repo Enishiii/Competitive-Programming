@@ -11,7 +11,7 @@ bool isPalindromeDate(const int& month, const int& day) {
 int countPalindromeDates(const vector<int>& daysInMonth) {
     int palindromeDateCount = 0;
     for (int month = 1; month <= daysInMonth.size(); ++month) {
-        
+
         for (int day = 1; day <= daysInMonth[month - 1]; ++day) {
             if (!isPalindromeDate(month, day)) continue;
 
@@ -22,10 +22,10 @@ int countPalindromeDates(const vector<int>& daysInMonth) {
 }
 
 int main() {
-    int n;
-    cin >> n;
+    int numberOfMonth;
+    cin >> numberOfMonth;
 
-    vector<int> daysInMonth(n);
+    vector<int> daysInMonth(numberOfMonth);
     for (auto& days : daysInMonth) cin >> days;
 
     int palindromeDateCount = countPalindromeDates(daysInMonth);
