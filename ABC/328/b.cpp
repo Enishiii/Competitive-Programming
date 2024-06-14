@@ -3,33 +3,33 @@
 #include <set>
 using namespace std;
 
-bool isZorome(const string& date) {
+bool isPalindromeDate(const int& month, const int& day) {
+    string date = to_string(month) + to_string(day);
     return size(set<char>(date.begin(), date.end())) == 1;
 }
 
-int countZoromeDate(const vector<int>& days) {
-    int n = days.size();
-    int zoromeCount = 0;
-    for (int m = 1; m <= n; ++m) {
-        string month = to_string(m);
-        for (int d = 1; d <= days[m - 1]; ++d) {
-            string date = month + to_string(d);
-            if (!isZorome(date)) continue;
-            zoromeCount++;
+int countPalindromeDates(const vector<int>& daysInMonth) {
+    int palindromeDateCount = 0;
+    for (int month = 1; month <= daysInMonth.size(); ++month) {
+        
+        for (int day = 1; day <= daysInMonth[month - 1]; ++day) {
+            if (!isPalindromeDate(month, day)) continue;
+
+            palindromeDateCount++;
         }
     }
-    return zoromeCount;
+    return palindromeDateCount;
 }
 
 int main() {
     int n;
     cin >> n;
 
-    vector<int> days(n);
-    for (auto& day : days) cin >> day;
+    vector<int> daysInMonth(n);
+    for (auto& days : daysInMonth) cin >> days;
 
-    int zoromeCount = countZoromeDate(days);
-    cout << zoromeCount << endl;
+    int palindromeDateCount = countPalindromeDates(daysInMonth);
+    cout << palindromeDateCount << endl;
 
     return 0;
 }
