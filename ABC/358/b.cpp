@@ -4,15 +4,15 @@ using namespace std;
 
 
 int main() {
-    int n, a;
-    cin >> n >> a;
+    int numCustomers, processingTime;
+    cin >> numCustomers >> processingTime;
 
-    vector<int> t(n);
-    for (int i = 0; i < n; ++i) cin >> t[i];
+    vector<int> arrivalTimes(numCustomers);
+    for (int i = 0; i < numCustomers; ++i) cin >> arrivalTimes[i];
 
-    long long currentTime = 0;
-    for (int i = 0; i < n; ++i) {
-        currentTime = max(currentTime, static_cast<long long>(t[i])) + a;
+    int currentTime = 0;
+    for (int i = 0; i < numCustomers; ++i) {
+        currentTime = max(currentTime, arrivalTimes[i]) + processingTime;
         cout << currentTime << endl;
     }
 
