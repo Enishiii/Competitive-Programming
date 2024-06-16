@@ -12,16 +12,8 @@ int main() {
 
     long long currentTime = 0;
     for (int i = 0; i < n; ++i) {
-        long long buyingTime;
-        if (t[i] <= currentTime) {
-            buyingTime = currentTime + a;
-        } else {
-            buyingTime = t[i] + a;
-        }
-
-        currentTime = buyingTime;
-
-        cout << buyingTime << endl;
+        currentTime = max(currentTime, static_cast<long long>(t[i])) + a;
+        cout << currentTime << endl;
     }
 
     return 0;
