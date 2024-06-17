@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-bool isAtCoderLand(string s, string t) {
+bool isAtCoderLand(const string& s, const string& t) {
     return (s == "AtCoder") && (t == "Land");
 }
 
