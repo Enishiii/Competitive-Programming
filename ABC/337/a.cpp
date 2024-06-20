@@ -6,7 +6,7 @@ struct Scores {
     int aokiSum;
 };
 
-void readScores(int numOfMatches, Scores& scores) {
+void readScores(const int& numOfMatches, Scores& scores) {
     for (int i = 0; i < numOfMatches; ++i) {
         int takahashiScore, aokiScore;
         cin >> takahashiScore >> aokiScore;
