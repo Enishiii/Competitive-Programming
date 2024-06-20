@@ -1,22 +1,40 @@
 #include <iostream>
 using namespace std;
 
+struct Scores {
+    int takahashiSum;
+    int aokiSum;
+};
+
+void readScores(int numOfMatches, Scores& scores) {
+    for (int i = 0; i < numOfMatches; ++i) {
+        int takahashiScore, aokiScore;
+        cin >> takahashiScore >> aokiScore;
+
+        scores.takahashiSum += takahashiScore;
+        scores.aokiSum += aokiScore;
+    }
+}
+
+void printWinner(const Scores& scores) {
+    if (scores.takahashiSum > scores.aokiSum) {
+        cout << "Takahashi" << endl;
+    } else if (scores.aokiSum > scores.takahashiSum) {
+        cout << "Aoki" << endl;
+    } else {
+        cout << "Draw" << endl;
+    }
+}
+
 int main() {
     int numOfMatches;
     cin >> numOfMatches;
 
-    int takahashiSum = 0, aokiSum = 0;
-    for (int i = 0; i < numOfMatches; ++i) {
-        int x, y;
-        cin >> x >> y;
+    Scores scores = {0, 0};
 
-        takahashiSum += x;
-        aokiSum += y;
-    }
+    readScores(numOfMatches, scores);
 
-    if (takahashiSum > aokiSum) cout << "Takahashi" << endl;
-    else if (aokiSum > takahashiSum) cout << "Aoki" << endl;
-    else cout << "Draw" << endl;
+    printWinner(scores);
 
     return 0;
 }
