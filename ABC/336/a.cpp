@@ -4,11 +4,15 @@ using namespace std;
 const string PREFIX = "L";
 const string SUFFIX = "ng";
 
+string generateLongString(int length) {
+    return PREFIX + string(length, 'o') + SUFFIX;
+}
+
 int main() {
     int numOfOs;
     cin >> numOfOs;
 
-    string results = PREFIX + string(numOfOs, 'o') + SUFFIX;
+    string results = generateLongString(numOfOs);
     cout << results << endl;
 
     return 0;
