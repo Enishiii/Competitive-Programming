@@ -5,11 +5,11 @@ const string PREFIX = "L";
 const string SUFFIX = "ng";
 
 int main() {
-    int n;
-    cin >> n;
+    int numOfOs;
+    cin >> numOfOs;
 
-    string answer = PREFIX + string(n, 'o') + SUFFIX;
-    cout << answer << endl;
+    string results = PREFIX + string(numOfOs, 'o') + SUFFIX;
+    cout << results << endl;
 
     return 0;
 }
