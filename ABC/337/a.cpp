@@ -2,11 +2,11 @@
 using namespace std;
 
 struct Scores {
-    int takahashiSum;
-    int aokiSum;
+    int takahashiSum = 0;
+    int aokiSum = 0;
 };
 
-void readScores(const int& numOfMatches, Scores& scores) {
+void readScores(int numOfMatches, Scores& scores) {
     for (int i = 0; i < numOfMatches; ++i) {
         int takahashiScore, aokiScore;
         cin >> takahashiScore >> aokiScore;
@@ -30,7 +30,7 @@ int main() {
     int numOfMatches;
     cin >> numOfMatches;
 
-    Scores scores = {0, 0};
+    Scores scores;
 
     readScores(numOfMatches, scores);
 
