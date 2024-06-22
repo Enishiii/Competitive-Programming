@@ -6,18 +6,18 @@ int main() {
     int candidateCount, voteCount;
     cin >> candidateCount >> voteCount;
 
-    vector<int> candidates(candidateCount, 0);
+    vector<int> candidates(candidateCount + 1, 0);
     int currentWinner = 1;
-    int currentWinnerVote = 0;
 
     for (int i = 0; i < voteCount; ++i) {
         int vote;
         cin >> vote;
 
-        candidates[vote - 1]++;
-        if ((candidates[vote - 1] > currentWinnerVote) || (candidates[vote - 1] == currentWinnerVote && vote < currentWinner)) {
+        candidates[vote]++;
+        if (candidates[vote] > candidates[currentWinner]) {
             currentWinner = vote;
-            currentWinnerVote = candidates[vote - 1];
+        } else if (candidates[vote] == candidates[currentWinner]) {
+            currentWinner = min(currentWinner, vote);
         }
 
         cout << currentWinner << '\n';
