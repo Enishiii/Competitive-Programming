@@ -10,7 +10,8 @@ int main() {
         string s;
         cin >> s;
 
-        if (s == "Takahashi") count++;
+        if (s != "Takahashi") continue;
+        count++;
     }
 
     cout << count << endl;
