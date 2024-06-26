@@ -5,8 +5,7 @@ int main() {
     int b, g;
     cin >> b >> g;
 
-    if (b > g) cout << "Bat" << endl;
-    else cout << "Glove" << endl;
+    cout << (b > g ? "Bat" : "Glove") << endl;
 
     return 0;
 }
