@@ -4,14 +4,14 @@
 using namespace std;
 
 int main() {
-    int n, l, r;
-    cin >> n >> l >> r;
+    int size, lower, upper;
+    cin >> size >> lower >> upper;
 
-    vector<int> a(n);
-    for (int i = 0; i < n; ++i) cin >> a[i];
+    vector<int> numbers(size);
+    for (auto& number : numbers) cin >> number;
 
-    for (int i = 0; i < n; ++i) {
-        cout << clamp(a[i], l, r) << " \n"[i == n - 1];
+    for (int i = 0; i < size; ++i) {
+        cout << clamp(numbers[i], lower, upper) << " \n"[i == size - 1];
     }
 
     return 0;
