@@ -2,20 +2,20 @@
 using namespace std;
 
 int main() {
-    int n, s, k;
-    cin >> n >> s >> k;
+    int itemCount, threshold, shippingCost;
+    cin >> itemCount >> threshold >> shippingCost;
 
-    int total = 0;
-    for (int i = 0; i < n; ++i) {
-        int p, q;
-        cin >> p >> q;
+    int totalCost = 0;
+    for (int i = 0; i < itemCount; ++i) {
+        int price, quantity;
+        cin >> price >> quantity;
 
-        total += p * q;
+        totalCost += price * quantity;
     }
 
-    if (total < s) total += k;
+    if (totalCost < threshold) totalCost += shippingCost;
 
-    cout << total << endl;
+    cout << totalCost << endl;
 
     return 0;
 }
