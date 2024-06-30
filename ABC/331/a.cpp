@@ -1,24 +1,41 @@
 #include <iostream>
 using namespace std;
 
+struct CalenderSystem {
+    int months;
+    int days;
+};
+
+struct Date {
+    int year;
+    int month;
+    int day;
+};
+
+void addOneDay(const CalenderSystem& calender, Date& date) {
+    date.day++;
+
+    if (date.day > calender.days) {
+        date.month++;
+        date.day = 1;
+    }
+
+    if (date.month > calender.months) {
+        date.year++;
+        date.month = 1;
+    }
+}
+
 int main() {
-    int months, days;
-    cin >> months >> days;
+    CalenderSystem calender;
+    cin >> calender.months >> calender.days;
 
-    int year, month, day;
-    cin >> year >> month >> day;
+    Date date;
+    cin >> date.year >> date.month >> date.day;
 
-    day++;
-    if (day > days) {
-        month++;
-        day = 1;
-    }
-    if (month > months) {
-        year++;
-        month = 1;
-    }
+    addOneDay(calender, date);
 
-    cout << year << " " << month << " " << day << endl;
+    cout << date.year << " " << date.month << " " << date.day << endl;
 
     return 0;
 }
