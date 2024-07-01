@@ -2,14 +2,14 @@
 using namespace std;
 
 int main() {
-    long long b;
-    cin >> b;
+    long long targetValue;
+    cin >> targetValue;
 
-    for (int a = 1; a <= 15; ++a) {
-        long long x = 1;
-        for (int i = 0; i < a; ++i) x *= a;
-        if (x == b) {
-            cout << a << endl;
+    for (int base = 1; base <= 15; ++base) {
+        long long currentValue = 1;
+        for (int i = 0; i < base; ++i) currentValue *= base;
+        if (currentValue == targetValue) {
+            cout << base << endl;
             return 0;
         }
     }
