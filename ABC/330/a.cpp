@@ -1,19 +1,25 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-int main() {
-    int n, l;
-    cin >> n >> l;
-
+int countPeopleMeetingCondition(const vector<int>& points, int threshold) {
     int count = 0;
-    for (int i = 0; i < n; ++i) {
-        int a;
-        cin >> a;
-
-        if (a < l) continue;
+    for (int point : points) {
+        if (point < threshold) continue;
 
         count++;
     }
+    return count;
+}
+
+int main() {
+    int peopleCount, threshold;
+    cin >> peopleCount >> threshold;
+
+    vector<int> points(peopleCount);
+    for (auto& point : points) cin >> point;
+
+    int count = countPeopleMeetingCondition(points, threshold);
     cout << count << endl;
 
     return 0;
