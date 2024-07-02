@@ -5,9 +5,9 @@ using namespace std;
 int countPeopleMeetingCondition(const vector<int>& points, int threshold) {
     int count = 0;
     for (int point : points) {
-        if (point < threshold) continue;
-
-        count++;
+        if (point >= threshold) {
+            count++;
+        }
     }
     return count;
 }
