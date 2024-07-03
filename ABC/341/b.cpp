@@ -2,20 +2,27 @@
 #include <vector>
 using namespace std;
 
-int main() {
-    int n;
-    cin >> n;
+void transferCurrencyBetweenCountries(vector<long long>& currencies) {
+    int numCountries = currencies.size();
+    for (int i = 0; i < numCountries - 1; ++i) {
+        int cost, gain;
+        cin >> cost >> gain;
 
-    vector<long long> a(n);
-    for (int i = 0; i < n; ++i) cin >> a[i];
-
-    for (int i = 0; i < n - 1; ++i) {
-        int s, t;
-        cin >> s >> t;
-
-        a[i + 1] += a[i] / s * t;
+        currencies[i + 1] += (currencies[i] / cost) * gain;
     }
-    cout << a[n-1] << endl;
+
+}
+
+int main() {
+    int numCountries;
+    cin >> numCountries;
+
+    vector<long long> currencies(numCountries);
+    for (int i = 0; i < numCountries; ++i) cin >> currencies[i];
+
+    transferCurrencyBetweenCountries(currencies);
+
+    cout << currencies[numCountries-1] << endl;
 
     return 0;
 }
