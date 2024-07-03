@@ -18,7 +18,7 @@ int main() {
     cin >> numCountries;
 
     vector<long long> currencies(numCountries);
-    for (int i = 0; i < numCountries; ++i) cin >> currencies[i];
+    for (auto& currency : currencies) cin >> currency;
 
     transferCurrencyBetweenCountries(currencies);
 
