@@ -4,12 +4,14 @@ using namespace std;
 bool checkPatternMatch(const string& source, const string& target) {
     for (int windowSize = 1; windowSize < source.size(); ++windowSize) {
         for (int startIndex = 0; startIndex < windowSize; ++startIndex) {
-            string constructedString = "";
+            string constructed = "";
             for (int currentIndex = startIndex; currentIndex < source.size(); currentIndex += windowSize) {
-                constructedString += source[currentIndex];
+                constructed += source[currentIndex];
+
+                if (constructed.size() > target.size()) break;
             }
 
-            if (constructedString == target) {
+            if (constructed == target) {
                 return true;
             }
         }
