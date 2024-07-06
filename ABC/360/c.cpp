@@ -3,25 +3,39 @@
 #include <numeric>
 using namespace std;
 
-int main() {
-    int n;
-    cin >> n;
+struct BoxData {
+    int numBoxes;
+    vector<int> initialBoxIndices;
+    vector<int> packageWeights;
+};
 
-    vector<int> a(n), w(n);
-    vector<int> max_weight(n);
+int calculateMinimumMovingCost(BoxData& data) {
+    vector<int> maxWeightsInEachBox(data.numBoxes, 0);
 
-    for (int i = 0; i < n; ++i) cin >> a[i];
-    for (int i = 0; i < n; ++i) cin >> w[i];
-
-    for (int i = 0; i < n; ++i) {
-        a[i]--; // 0-indexed にする
-        max_weight[a[i]] = max(max_weight[a[i]], w[i]);
+    for (int i = 0; i < data.numBoxes; ++i) {
+        int targetBoxIndex = data.initialBoxIndices[i] - 1; // 0-indexed にする
+        maxWeightsInEachBox[targetBoxIndex] = max(maxWeightsInEachBox[targetBoxIndex], data.packageWeights[i]);
     }
 
-    const int sum_w = accumulate(w.begin(), w.end(), 0);
-    const int sum_max = accumulate(max_weight.begin(), max_weight.end(), 0);
+    int totalWeightSum = accumulate(data.packageWeights.begin(), data.packageWeights.end(), 0);
+    int maxWeightSum = accumulate(maxWeightsInEachBox.begin(), maxWeightsInEachBox.end(), 0);
 
-    cout << sum_w - sum_max << endl;
+    return totalWeightSum - maxWeightSum;
+}
+
+int main() {
+    BoxData data;
+    cin >> data.numBoxes;
+
+    data.initialBoxIndices.resize(data.numBoxes);
+    data.packageWeights.resize(data.numBoxes);
+
+    for (int i = 0; i < data.numBoxes; ++i) cin >> data.initialBoxIndices[i];
+    for (int i = 0; i < data.numBoxes; ++i) cin >> data.packageWeights[i];
+
+    int minimumCost = calculateMinimumMovingCost(data);
+
+    cout << minimumCost << endl;
 
     return 0;
 }
