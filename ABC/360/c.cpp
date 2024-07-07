@@ -3,39 +3,45 @@
 #include <numeric>
 using namespace std;
 
-struct BoxData {
-    int numBoxes;
-    vector<int> initialBoxIndices;
-    vector<int> packageWeights;
-};
+class BoxOrganizer {
+public:
+    BoxOrganizer(int numBoxes) : numBoxes_(numBoxes), initialBoxIndices_(numBoxes), packageWeights_(numBoxes) {}
 
-int calculateMinimumMovingCost(BoxData& data) {
-    vector<int> maxWeightsInEachBox(data.numBoxes, 0);
-
-    for (int i = 0; i < data.numBoxes; ++i) {
-        int targetBoxIndex = data.initialBoxIndices[i] - 1; // 0-indexed にする
-        maxWeightsInEachBox[targetBoxIndex] = max(maxWeightsInEachBox[targetBoxIndex], data.packageWeights[i]);
+    void readInput() {
+        for (int i = 0; i < numBoxes_; ++i) cin >> initialBoxIndices_[i];
+        for (int i = 0; i < numBoxes_; ++i) cin >> packageWeights_[i];
     }
 
-    int totalWeightSum = accumulate(data.packageWeights.begin(), data.packageWeights.end(), 0);
-    int maxWeightSum = accumulate(maxWeightsInEachBox.begin(), maxWeightsInEachBox.end(), 0);
+    int calculateMinimumMovingCost() const {
+        vector<int> maxWeightsInEachBox(numBoxes_);
 
-    return totalWeightSum - maxWeightSum;
-}
+        for (int i = 0; i < numBoxes_; ++i) {
+            int targetBoxIndex = initialBoxIndices_[i] - 1;
+            maxWeightsInEachBox[targetBoxIndex] = max(maxWeightsInEachBox[targetBoxIndex], packageWeights_[i]);
+        }
+
+        int totalWeightSum = accumulate(packageWeights_.begin(), packageWeights_.end(), 0);
+        int maxWeightSum = accumulate(maxWeightsInEachBox.begin(), maxWeightsInEachBox.end(), 0);
+
+        return totalWeightSum - maxWeightSum;
+    }
+
+private:
+    int numBoxes_;
+    vector<int> initialBoxIndices_;
+    vector<int> packageWeights_;
+};
 
 int main() {
-    BoxData data;
-    cin >> data.numBoxes;
+    int numBoxes;
+    cin >> numBoxes;
 
-    data.initialBoxIndices.resize(data.numBoxes);
-    data.packageWeights.resize(data.numBoxes);
+    BoxOrganizer organizer(numBoxes);
+    organizer.readInput();
 
-    for (int i = 0; i < data.numBoxes; ++i) cin >> data.initialBoxIndices[i];
-    for (int i = 0; i < data.numBoxes; ++i) cin >> data.packageWeights[i];
+    int minimumMovingCost = organizer.calculateMinimumMovingCost();
 
-    int minimumCost = calculateMinimumMovingCost(data);
-
-    cout << minimumCost << endl;
+    cout << minimumMovingCost << endl;
 
     return 0;
 }
