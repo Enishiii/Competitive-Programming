@@ -2,25 +2,25 @@
 using namespace std;
 
 int main() {
-    int n, m;
-    cin >> n >> m;
+    int numDays, initialPlainShirts;
+    cin >> numDays >> initialPlainShirts;
 
-    int ans = 0;
-    int x = 0, y = 0;
-    string s;
+    string schedule;
+    cin >> schedule;
+    schedule += '0';
 
-    cin >> s;
-    s += '0';
+    int maxShirtsNeeded = 0;
+    int plainCount = 0, logoCount = 0;
 
-    for (int i = 0; i <= n; ++i) {
-        if (s[i] == '0') {
-            ans = max(ans, max(x + y - m, y));
-            x = 0, y = 0;
+    for (int i = 0; i <= numDays; ++i) {
+        if (schedule[i] == '0') {
+            maxShirtsNeeded = max(maxShirtsNeeded, max(plainCount + logoCount - initialPlainShirts, logoCount));
+            plainCount = 0, logoCount = 0;
         }
-        if (s[i] == '1') x++;
-        if (s[i] == '2') y++;
+        if (schedule[i] == '1') plainCount++;
+        if (schedule[i] == '2') logoCount++;
     }
-    cout << ans << endl;
+    cout << maxShirtsNeeded << endl;
 
     return 0;
 }
