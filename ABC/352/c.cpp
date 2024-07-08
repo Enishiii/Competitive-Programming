@@ -7,7 +7,8 @@ struct Giant {
     long long headHeight;
 };
 
-void readInput(int numGiants, vector<Giant>& giants) {
+void readInput(vector<Giant>& giants) {
+    int numGiants;
     cin >> numGiants;
     giants.resize(numGiants);
     for (int i = 0; i < numGiants; ++i) {
@@ -32,10 +33,9 @@ long long sumUpShoulderHeights(const vector<Giant>& giants) {
 }
 
 int main() {
-    int numGiants;
     vector<Giant> giants;
 
-    readInput(numGiants, giants);
+    readInput(giants);
 
     long long maxHeadShoulderDifference = calculateMaxHeadShoulderDifference(giants);
 
