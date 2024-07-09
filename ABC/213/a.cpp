@@ -6,6 +6,7 @@ int main() {
     cin >> a >> b;
 
     for (int c = 0; c <= 255; ++c) {
+        // aとcの排他的論理和(xor)がbと等しければ、cを出力
         if ((a^c) == b) {
             cout << c << endl;
             return 0;
