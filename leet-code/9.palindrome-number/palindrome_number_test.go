@@ -23,6 +23,26 @@ func TestIsPalindrome(t *testing.T) {
 			x: 10,
 			want: false,
 		},
+		{
+			name: "zero",
+			x: 0,
+			want: true,
+		},
+		{
+			name: "even digits palindrome",
+			x: 1221,
+			want: true,
+		},
+		{
+			name: "single digit",
+			x: 7,
+			want: true,
+		},
+		{
+			name: "not palindrome",
+			x: 123,
+			want: false,
+		},
 	}
 
 	for _, tt := range tests {
